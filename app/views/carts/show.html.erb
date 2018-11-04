@@ -16,7 +16,13 @@
          </td>
          <td> <%= cart_item.product.title %> <br>
           <%= cart_item.product.artist.artist_name %> </td>
-          <td> <%= cart_item.quantity %> </td>
+
+          <td><%= form_for([@cart,cart_item], url: cart_item_update_path(@cart.id,cart_item.id)) do |f| %>
+            <%= f.number_field :quantity, required:true, min:'1', :value => cart_item.quantity %>
+            <%= f.submit "変更" %>
+              <% end %>
+            </td>
+
           <td> <%= cart_item.product.price * cart_item.quantity %> </td>
           <td> <%= link_to "削除", cart_delete_item_path(current_user.carts.where(user_id: current_user.id).last,cart_item.id), method: :delete,class: "btn btn-danger" %> </td>
           <% sum  = sum + cart_item.product.price * cart_item.quantity %>

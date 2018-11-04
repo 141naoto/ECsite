@@ -43,10 +43,18 @@ class CartsController < ApplicationController
     redirect_to cart_path(current_user.carts.where(user_id: current_user.id).last.id)
   end
 
+  def update_item
+    cart = current_user.carts.where(user_id: current_user.id).last
+    cart_item = CartItem.find_by(cart_id: cart.id, id: params[:id])
+    cart_item.update(cart_item_params)
+    redirect_to cart_path(current_user.carts.where(user_id: current_user.id).last.id)
+  end
+
 private
     def cart_params
         params.require(:cart).permit(:user_id)
     end
-
+    def cart_item_params
+        params.require(:cart_item).permit(:quantity)
+    end
 end
-

@@ -7,7 +7,7 @@ class Admin::UsersController < Admin::ApplicationController
 	    end
   	end
 	def index
-		@users = User.all
+		@users = User.with_deleted.all
 	end
 
 	def show

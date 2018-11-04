@@ -39,10 +39,10 @@ end
   end
 
   resources :carts, only:[:show] do
-  post '/add_item' => 'carts#add_item'
-  post '/update_item' => 'carts#update_item'
-  delete '/cart_items/:id' => 'carts#delete_item',as: 'delete_item'
-end
+    post '/add_item' => 'carts#add_item'
+    patch '/cart_items/:id/update_item' => 'carts#update_item',as: 'item_update'
+    delete '/cart_items/:id' => 'carts#delete_item',as: 'delete_item'
+  end
 
   resources :categories, only:[:new, :create, :update, :destroy, :show, :edit]
   resources :animes, only:[:index, :create, :update, :destroy, :show, :edit]

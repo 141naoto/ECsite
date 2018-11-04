@@ -16,8 +16,12 @@
 			<td><%= user.id %></td>
 			<td><%= user.name %></td>
 			<td><%= user.email %></td>
-			<td><%= link_to "詳細", user_path(user), class:"btn-sm btn-success" %>
+			<td><% if user.deleted_at.nil? %>
+				<%= link_to "詳細", user_path(user), class:"btn-sm btn-success" %>
 				<%= link_to "削除", user_path(user), method: :delete, data: {confirm: "退会させますか?" }, class:"btn-sm btn-danger" %>
+				<% else %>
+				<p>退会済</p>
+				<% end %>
 			</td>
 		</tr>
 	</tbody>
